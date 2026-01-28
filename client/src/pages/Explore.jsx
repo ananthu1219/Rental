@@ -1,8 +1,13 @@
+import Header from '@/components/Header'
 import React from 'react'
 
 function Explore() {
   return (
-    <div>Explore</div>
+    <>
+    <div className="">
+    <Header/>
+    </div>
+    </>
   )
 }
 
