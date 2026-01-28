@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+const ROLES = require('../enums/role.enum');
 
 const userSchema=mongoose.Schema({
     username:{
@@ -22,10 +23,10 @@ const userSchema=mongoose.Schema({
         required:false
     },
     role:{
-        type:String,
-        required:false,
-        default:'BookStore user'
-    }
+        type: String,
+        enum: Object.values(ROLES),
+        default: ROLES.USER
+      }
 })
 
 module.exports=mongoose.model('User',userSchema)
