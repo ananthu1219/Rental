@@ -1,65 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-export default function BikeHero() {
-  return (
-    <LampContainer>
-      {/* TEXT BLOCK (Always inside the glow) */}
-      <div className="flex flex-col items-center">
-<motion.h1
-  initial={{ opacity: 0.5, y: 100 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-  className="mt-8 text-green-400 text-center 
-  text-3xl sm:text-4xl md:text-7xl 
-  font-bold tracking-tight px-4
-  [text-shadow:0_6px_25px_rgba(0,0,0,0.9)]"
->
-  Rent a Bike <br /> Ride the City
-</motion.h1>
+import { Link } from "react-router-dom";
 
 
-        <motion.p
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="mt-4 max-w-xl text-center text-slate-300 
-          text-sm sm:text-base px-6"
-        >
-          Fast, affordable, and eco-friendly bike rentals for daily commutes and
-          city adventures.
-        </motion.p>
-      </div>
-
-      {/* BUTTON */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.05 }}
-        transition={{ delay: 0.9, duration: 0.5 }}
-        className="
-          mt-8 
-          md:mt-16 
-          rounded-full bg-green-500 px-6 sm:px-8 py-2.5 sm:py-3 
-          text-base sm:text-lg font-semibold text-black 
-          hover:bg-green-400 transition
-          
-          /* Mobile: outside glow */
-          relative z-50
-          
-          /* Desktop: move inside glow */
-          -translate-y-0 md:-translate-y-6
-        "
-      >
-        Book a Bike
-      </motion.button>
-    </LampContainer>
-  );
-}
-
-
-export const LampContainer = ({ children, className }) => {
+export function LampContainer({ children, className }) {
   return (
     <div
       className={cn(
@@ -72,23 +17,23 @@ export const LampContainer = ({ children, className }) => {
         {/* RIGHT GLOW */}
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "clamp(18rem, 80vw, 30rem)" }}
+          animate={{ opacity: 1, width: "clamp(18rem, 80vw, 30rem)" }}
           transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
           style={{
             backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
           }}
-          className="absolute right-1/2 h-56 w-[30rem] bg-gradient-conic from-green-500 via-transparent to-transparent [--conic-position:from_70deg_at_center_top]"
+          className="absolute right-1/2 h-56 bg-gradient-conic from-green-500 via-transparent to-transparent [--conic-position:from_70deg_at_center_top]"
         />
 
         {/* LEFT GLOW */}
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "clamp(18rem, 80vw, 30rem)" }}
+          animate={{ opacity: 1, width: "clamp(18rem, 80vw, 30rem)" }}
           transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
           style={{
             backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
           }}
-          className="absolute left-1/2 h-56 w-[30rem] bg-gradient-conic from-transparent via-transparent to-green-500 [--conic-position:from_290deg_at_center_top]"
+          className="absolute left-1/2 h-56 bg-gradient-conic from-transparent via-transparent to-green-500 [--conic-position:from_290deg_at_center_top]"
         />
 
         {/* BLUR LAYERS */}
@@ -99,17 +44,17 @@ export const LampContainer = ({ children, className }) => {
         {/* CENTER GLOW */}
         <motion.div
           initial={{ width: "8rem" }}
-          whileInView={{ width: "16rem" }}
+          animate={{ width: "16rem" }}
           transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-          className="absolute z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-green-400 blur-2xl"
+          className="absolute z-30 h-36 -translate-y-[6rem] rounded-full bg-green-400 blur-2xl"
         />
 
         {/* LIGHT LINE */}
         <motion.div
           initial={{ width: "8rem" }}
-          whileInView={{ width: "clamp(18rem, 80vw, 30rem)" }}
+          animate={{ width: "clamp(18rem, 80vw, 30rem)" }}
           transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-          className="absolute z-50 h-0.5 w-[30rem] -translate-y-[7rem] bg-green-400"
+          className="absolute z-50 h-0.5 -translate-y-[7rem] bg-green-400"
         />
 
         <div className="absolute z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950" />
@@ -121,4 +66,63 @@ export const LampContainer = ({ children, className }) => {
       </div>
     </div>
   );
-};
+}
+
+/* ================= BIKE HERO ================= */
+
+export default function BikeHero() {
+  return (
+    <LampContainer>
+
+      {/* TEXT BLOCK */}
+      <div className="flex flex-col items-center">
+
+        <motion.h1
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
+          className="mt-8 text-green-400 text-center 
+          text-3xl sm:text-4xl md:text-7xl 
+          font-bold tracking-tight px-4
+          [text-shadow:0_6px_25px_rgba(0,0,0,0.9)]"
+        >
+          Rent a Bike <br /> Ride the City
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="mt-4 max-w-xl text-center text-slate-300 
+          text-sm sm:text-base px-6"
+        >
+          Fast, affordable, and eco-friendly bike rentals for daily commutes and
+          city adventures.
+        </motion.p>
+      </div>
+
+      {/* BUTTON */}
+
+
+      <Link to="/explore">
+      <motion.button
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.05 }}
+        transition={{ delay: 0.9, duration: 0.5 }}
+        className="
+          mt-8 md:mt-16 
+          rounded-full bg-green-500 px-6 sm:px-8 py-2.5 sm:py-3 
+          text-base sm:text-lg font-semibold text-black 
+          hover:bg-green-400 transition
+          relative z-50
+          md:-translate-y-6
+        "
+      >
+        Book a Bike
+      </motion.button>
+      </Link>
+
+    </LampContainer>
+  );
+}
