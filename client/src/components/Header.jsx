@@ -44,13 +44,14 @@ function Header() {
         {/* Actions */}
         <div className="flex items-center gap-4">
           {/* Login */}
-          <NavLink
-            to="/auth"
-            className="border border-green-500 text-green-500 px-5 py-2 rounded-lg font-semibold hover:bg-green-500 hover:text-black transition"
-          >
-            Login
-          </NavLink>
-
+            {
+              
+              <NavLink
+          to="/auth"
+          className="border border-green-500 text-green-500 px-5 py-2 rounded-lg font-semibold hover:bg-green-500 hover:text-black transition">
+          Login
+              </NavLink>
+            }
           {/* Rent Now */}
           <NavLink
             to="/rent"
