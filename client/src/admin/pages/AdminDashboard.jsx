@@ -1,8 +1,13 @@
 import React from 'react'
+import AdminHeader from '../components/AdminHeader'
 
 function AdminDashboard() {
   return (
-    <div>AdminDashboard</div>
+    <>
+      <AdminHeader />
+      <div>AdminDashboard</div>
+    </>
+
   )
 }
 
