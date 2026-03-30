@@ -24,7 +24,6 @@ const vehicleSchema = new mongoose.Schema({
   },
   mileage: Number,
 
-  // ✅ NEW FIELDS
   image: {
     type: String
   },

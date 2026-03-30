@@ -3,60 +3,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, X, Calendar } from "lucide-react";
-
-// MOCK DATA
-const BIKES = [
-  {
-    id: 1,
-    name: "Yamaha R15 V4",
-    image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=2940&auto=format&fit=crop",
-    price: 35,
-    rating: 4.8,
-    category: "Sports",
-  },
-  {
-    id: 2,
-    name: "Royal Enfield Classic 350",
-    image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2940&auto=format&fit=crop",
-    price: 45,
-    rating: 4.9,
-    category: "Cruiser",
-  },
-  {
-    id: 3,
-    name: "KTM Duke 390",
-    image: "https://images.unsplash.com/photo-1596423736776-6ba6a7751c6e?q=80&w=2836&auto=format&fit=crop",
-    price: 50,
-    rating: 4.7,
-    category: "Naked",
-  },
-  {
-    id: 4,
-    name: "BMW G 310 R",
-    image: "https://images.unsplash.com/photo-1622185135505-2d79504399d9?q=80&w=2940&auto=format&fit=crop",
-    price: 60,
-    rating: 4.9,
-    category: "Premium",
-  },
-  {
-    id: 5,
-    name: "Kawasaki Ninja 400",
-    image: "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?q=80&w=2940&auto=format&fit=crop",
-    price: 55,
-    rating: 4.8,
-    category: "Sports",
-  },
-  {
-    id: 6,
-    name: "Harley Davidson 883",
-    image: "https://images.unsplash.com/photo-1525160354320-545e30ed5546?q=80&w=2836&auto=format&fit=crop",
-    price: 85,
-    rating: 5.0,
-    category: "Cruiser",
-  },
-];
+import { getAllBikes } from "../services/allAPIs";
+import { useEffect } from "react";
 
 function Explore() {
+  const [bikes, setBikes] = useState([]);
   const [selectedBike, setSelectedBike] = useState(null);
   const [dates, setDates] = useState({ start: "", end: "" });
 
@@ -64,6 +15,19 @@ function Explore() {
     setSelectedBike(bike);
     setDates({ start: "", end: "" });
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getAllBikes();
+        console.log(response);
+        setBikes(response);
+      } catch (error) {
+        console.error("Error fetching bikes:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleConfirmRent = (e) => {
     e.preventDefault();
@@ -93,14 +57,14 @@ function Explore() {
 
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {BIKES.map((bike) => (
+          {bikes.map((bike) => (
             <motion.div
               layout
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
               viewport={{ once: true }}
-              key={bike.id}
+              key={bike._id}
               className="group relative bg-slate-900 rounded-2xl overflow-hidden border border-white/5 hover:border-green-500/30 hover:shadow-[0_0_30px_rgba(34,197,94,0.1)] transition-all"
             >
               {/* IMAGE */}
